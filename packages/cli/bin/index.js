@@ -16,10 +16,9 @@ dotenv.config();
 
 program
     .version("1.0.0")
-    .description("My Node CLI")
-    .option("-n, --name <type>", "Add your name")
-    .option("-d, --downloadFile [value]", "Add your value")
-    .option("--listRemoteFiles");
+    .description("My Boigen CLI")
+    .option("-d, --downloadFile [value]", "Download your template file name")
+    .option("--listRemoteFiles", "List your template files");
 
 
 
@@ -73,7 +72,11 @@ const getRemoteFiles = async () => {
         });
 
         const response = await r2.send(command);
-        console.log("Objects in the bucket:", response.Contents);
+        // console.log("Objects in the bucket:", response.Contents);
+        console.log("Available Files : ")
+        response.Contents.forEach(item => {
+            console.log(item.Key);
+        });
     }
     catch (error) {
         console.error("Error listing objects:", error);
