@@ -1,10 +1,18 @@
+"use client"
 import { Button } from "@/components/ui/button";
+import { trpc } from "@/server/client";
 import Image from "next/image";
 
+
 export default function Home() {
+
+  const ls = trpc.getTodos.useQuery();
+
+
   return (
     <div className="flex items-center justify-center">
-      <Button>Hello</Button>
+
+      {JSON.stringify(ls.data)}
     </div>
   );
 }
