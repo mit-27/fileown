@@ -1,4 +1,7 @@
+import { db } from '@/db';
 import { router, publicProcedure } from './trpc';
+
+
 
 export const appRouter = router({
     // ...

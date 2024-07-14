@@ -1,8 +1,11 @@
 import { defineConfig } from "drizzle-kit";
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
+
+// Load environment variables from .env.local
+dotenv.config({ path: '.env.local' });
 
 // Load environment variables
-dotenv.config();
+// dotenv.config();
 
 export default defineConfig({
     dialect: "sqlite", // "mysql" | "sqlite" | "postgresql"
@@ -13,4 +16,6 @@ export default defineConfig({
         authToken: process.env.TURSO_DATABASE_AUTH_TOKEN
     },
     out: "./drizzle",
+    verbose: true,
+    strict: true
 });
