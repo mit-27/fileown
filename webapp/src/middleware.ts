@@ -1,7 +1,7 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-
+// TODO - Add Protected Route
 const isProtectedRoute = createRouteMatcher([
     '/dashboard(.*)',
 ]);

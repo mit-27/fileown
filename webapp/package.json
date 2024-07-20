@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "pnpm run push && next dev --turbo",
+    "dev": "pnpm run push && concurrently --kill-others \"pnpm run dev:studio\" \"pnpm run dev:next\"",
+    "dev:next": "next dev -p 3000 --turbo",
+    "dev:studio": "drizzle-kit studio --port 3001",
     "push": "drizzle-kit push",
-    "generate":"drizzle-kit generate",
+    "generate": "drizzle-kit generate",
     "build": "pnpm run generate && next build",
     "start": "next start",
     "lint": "next lint"
@@ -26,6 +28,7 @@
     "@trpc/server": "11.0.0-rc.461",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "concurrently": "^8.2.2",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.32.0",
     "lucide-react": "^0.399.0",
