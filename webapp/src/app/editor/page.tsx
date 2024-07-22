@@ -23,31 +23,51 @@ import {
     CardHeader,
     CardTitle,
   } from "@/components/ui/card"
+import { trpc } from '@/server/client';
   
 
 const page = () => {
 
     const [value,setValue] = useState<string|undefined>('');
     const [fileName,setFileName] = useState<string>('');
+    const [folderName,setFolderName] = useState<string>('');
+    const [files,setFiles] = useState<string>('');
     const [loading,setLoading] = useState<boolean>(false);
-    const [selectedLanguage,setSelectedLanguage] = useState<string>('javascript')
+    const [selectedLanguage,setSelectedLanguage] = useState<string>('javascript');
+    const uploadMutate = trpc.uploadFile.useMutation();
+    const getFilesMutate = trpc.getFileStruct.useMutation();
 
     const upload = async () => {
         try
         {
             setLoading(true);
             const tFileName = fileName +FILE_EXTENSIONS[selectedLanguage];
-            const res = await fetch('/api/upload',
-                {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        fileName:tFileName,
-                        fileContent: value
-                    })
+
+
+            uploadMutate
+            .mutate({fileName:tFileName,fileContent:value!},{
+                onSettled : () => {
+                    toast.success("Template Uploaded")
+                    setLoading(false);
+                },
+                onError:() => {
+                    toast.error("Error occured");
+                    setLoading(false);
                 }
-            );
-            toast.success("Template Uploaded")
-            setLoading(false);
+            })
+
+
+            // const res = await fetch('/api/upload',
+            //     {
+            //         method: 'POST',
+            //         body: JSON.stringify({
+            //             fileName:tFileName,
+            //             fileContent: value
+            //         })
+            //     }
+            // );
+            // toast.success("Template Uploaded")
+            // setLoading(false);
 
 
             // const response = await res.json();
@@ -58,6 +78,21 @@ const page = () => {
             setLoading(false);
             console.error(error)
         }
+    }
+
+    const getFiles = async () => {
+
+        getFilesMutate.mutate(folderName,{
+            onSettled: (data) =>{
+                let Files_temp = data?.map(fd => fd.Key);
+                setFiles(JSON.stringify(Files_temp));
+                
+            },
+            onError: (error) => {
+                console.log(error);
+            }
+        })
+
     }
 
 
@@ -93,6 +128,30 @@ const page = () => {
                 <p>Uploading</p>
                 </span>
             ) : 'Upload your template'}</Button>
+
+        </div>
+
+        <div className='flex m-5 p-3 items-end gap-5'>
+            <div className='flex flex-col gap-2'>
+                <label>Enter Folder Name</label>
+                <Input type='text' value={folderName} onChange={(e) => setFolderName(e.target.value)} />
+            </div>
+
+            <Button variant='ringHover' onClick={() => getFiles()}>{loading ? (
+                <span className='flex gap-2 items-center'>
+                <LoadingSpinner/>
+                <p>Getting</p>
+                </span>
+            ) : 'Get Files for folder'}</Button>
+
+
+            <div className='flex flex-col gap-2'>
+                <label>Files Name</label>
+                <Input type='text' disabled value={files} />
+            </div>
+
+
+
 
         </div>
 
