@@ -1,0 +1,24 @@
+{
+    "name": "@fileown/db",
+    "version": "0.0.1",
+    "description": "",
+    "main": "src/index.ts",
+    "scripts": {
+        "generate": "drizzle-kit generate",
+        "push": "drizzle-kit push",
+        "migrate": "bun src/migrate.mts",
+        "studio": "drizzle-kit studio"
+    },
+    "dependencies": {
+        "@libsql/client": "^0.7.0",
+        "dotenv": "^16.4.5",
+        "drizzle-orm": "^0.32.0",
+        "drizzle-zod": "^0.5.1",
+        "zod": "^3.23.8"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "drizzle-kit": "^0.23.0",
+        "typescript": "^5"
+    }
+}
