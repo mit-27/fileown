@@ -10,7 +10,15 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.2.3",
+    "@fileown/api": "workspace:*",
+    "@fileown/db": "workspace:*",
+    "@libsql/client": "^0.7.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-query": "^5.51.21",
+    "@trpc/client": "11.0.0-rc.461",
+    "@trpc/next": "11.0.0-rc.461",
+    "@trpc/react-query": "11.0.0-rc.461",
+    "@trpc/server": "11.0.0-rc.461",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "lucide-react": "^0.399.0",
@@ -18,6 +26,7 @@
     "next-themes": "^0.3.0",
     "react": "^18",
     "react-dom": "^18",
+    "superjson": "^2.2.1",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7"
   },

@@ -5,7 +5,7 @@ import 'dotenv/config';
 
 async function main() {
     const db = drizzle(
-        createClient({ url: process.env.DATABASE_URL!, authToken: process.env.DATABASE_AUTH_TOKEN }),
+        createClient({ url: process.env.TURSO_DATABASE_URL!, authToken: process.env.TURSO_DATABASE_AUTH_TOKEN }),
     );
     console.log("Running migrations");
 

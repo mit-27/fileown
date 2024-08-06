@@ -5,6 +5,12 @@ const nextConfig = {
     },
     eslint: {
         ignoreDuringBuilds: true,
+    },
+    transpilePackages: ["@fileown/api"],
+    experimental: {
+        serverComponentsExternalPackages: [
+            "libsql",
+        ]
     }
 };
 

@@ -13,7 +13,7 @@ node_modules
 .env.production.local
 
 # DB
-.fileown-dev.db
+fileown-dev.db
 
 # Testing
 coverage

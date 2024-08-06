@@ -1,0 +1,20 @@
+{
+    "name": "@fileown/api",
+    "version": "0.0.1",
+    "description": "",
+    "main": "index.ts",
+    "dependencies": {
+        "@trpc/client": "11.0.0-rc.477",
+        "@trpc/server": "11.0.0-rc.477",
+        "@fileown/db": "workspace:*",
+        "superjson": "^2.2.1",
+        "zod": "^3.23.8",
+        "next": "14.2.4"
+
+    },
+    "devDependencies": {
+        "@fileown/tsconfig": "workspace:*",
+        "bun-types": "1.0.8",
+        "typescript": "^5"
+    }
+}

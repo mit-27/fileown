@@ -17,6 +17,7 @@
         "zod": "^3.23.8"
     },
     "devDependencies": {
+        "@fileown/tsconfig": "workspace:*",
         "@types/node": "^20",
         "drizzle-kit": "^0.23.0",
         "typescript": "^5"
