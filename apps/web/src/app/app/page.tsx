@@ -14,16 +14,17 @@ const TodoPage = () => {
     const [todo,setTodo] = useState<string>('')
 
   return (
-    <div className='flex justify-center items-center min-h-full'>
+    <div className='flex justify-center items-center h-screen flex-col gap-2'>
       <div>
         {JSON.stringify(todos?.data)}
       </div>
       <div>
         <input type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
-        <button onClick={() => {
+        
+      </div>
+      <button onClick={() => {
           addTodo.mutate(todo);
         }}>Add</button>
-      </div>
     </div>
   )
 }

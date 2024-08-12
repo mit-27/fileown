@@ -1,11 +1,11 @@
 import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { migrate } from "drizzle-orm/libsql/migrator";
-import 'dotenv/config';
+import { env } from "../env.mjs";
 
 async function main() {
     const db = drizzle(
-        createClient({ url: process.env.TURSO_DATABASE_URL!, authToken: process.env.TURSO_DATABASE_AUTH_TOKEN }),
+        createClient({ url: env.TURSO_DATABASE_URL!, authToken: env.TURSO_DATABASE_AUTH_TOKEN }),
     );
     console.log("Running migrations");
 

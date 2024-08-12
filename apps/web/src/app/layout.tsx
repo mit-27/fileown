@@ -3,6 +3,8 @@ import "./globals.css";
 import { cn } from "@/lib/utils"
 import { Inter as FontSans } from "next/font/google"
 import Provider from "@/trpc/Provider";
+import { ClerkProvider } from '@clerk/nextjs'
+
 
 
 const fontSans = FontSans({
@@ -22,17 +24,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body 
-          className={cn(
-            "min-h-screen font-sans",
-            fontSans.variable
-          )}
-          >
-          <Provider>
-              {children}
-          </Provider>
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en">
+        <body 
+            className={cn(
+              "min-h-screen font-sans",
+              fontSans.variable
+            )}
+            >
+            <Provider>
+                {children}
+            </Provider>
+        </body>
+      </html>
+    </ClerkProvider>
+    
   );
 }
