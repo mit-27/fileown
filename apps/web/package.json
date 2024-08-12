@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.2.3",
+    "@clerk/nextjs": "^5.2.12",
     "@fileown/api": "workspace:*",
     "@fileown/db": "workspace:*",
     "@libsql/client": "^0.7.0",
