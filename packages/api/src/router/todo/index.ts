@@ -1,7 +1,7 @@
 
 import { todo } from '@fileown/db/src/schema';
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from '../../trpc'
+import { createTRPCRouter, publicProcedure, protectedProcedure } from '../../trpc'
 
 export const todoRouter = createTRPCRouter({
     getTodos: publicProcedure.query(async ({ ctx }) => {
@@ -11,4 +11,9 @@ export const todoRouter = createTRPCRouter({
         await ctx.db.insert(todo).values({ content: input });
         return true;
     }),
+    protectTodo: protectedProcedure.query(async ({ ctx }) => {
+
+        return ctx.auth.userId;
+
+    })
 })

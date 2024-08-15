@@ -6,6 +6,7 @@ import React, { useState } from 'react'
 const TodoPage = () => {
 
     const todos = api.todo.getTodos.useQuery();
+    const protectTodoData = api.todo.protectTodo.useQuery();
     const addTodo = api.todo.addTodo.useMutation({
       onSettled: () => {
         todos.refetch();
@@ -18,13 +19,14 @@ const TodoPage = () => {
       <div>
         {JSON.stringify(todos?.data)}
       </div>
+        {JSON.stringify(protectTodoData?.data)}
       <div>
         <input type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
         
       </div>
-      <button onClick={() => {
-          addTodo.mutate(todo);
-        }}>Add</button>
+      <button onClick={() => {addTodo.mutate(todo);}}>
+        Add
+      </button>
     </div>
   )
 }
