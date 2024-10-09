@@ -1,15 +1,19 @@
 {
-  "name": "fileown",
+  "name": "god-tier-saas-template",
   "private": true,
   "scripts": {
     "build": "turbo build",
-    "dev": "turbo dev",
+    "dev": "concurrently \"turbo run dev --filter=@template/web\" \"turbo run dev --filter=@template/server\" \"turbo run dev --filter=@template/shared\"",
+    "dev:db": "turbo run dev --filter=@template/shared",
+    "build:shared": "turbo run build --filter=@template/shared",
+    "dev:docker": "concurrently \"turbo run dev --filter=@template/server\" \"turbo run dev --filter=@template/shared\"",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
+    "concurrently": "^9.0.1",
     "prettier": "^3.2.5",
-    "turbo": "^2.0.11",
+    "turbo": "^2.1.2",
     "typescript": "^5.4.5"
   },
   "packageManager": "pnpm@8.15.6",
