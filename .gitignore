@@ -12,37 +12,23 @@ node_modules
 .env.test.local
 .env.production.local
 
-# DB
-fileown-dev.db
-packages/db/database.db
-packages/db/openstatus.db
-packages/db/fileown-dev.db-wal
-packages/db/fileown-dev.db-shm
-packages/db/fileown-dev.db-shm
-packages/db/fileown-dev.db-wal
-fileown-dev.db-wal
-fileown-dev.db
-fileown-dev.db-shm
-
 # Testing
 coverage
-
-# Drizzle
-packages/db/drizzle/*
-packages/db/drizzle/meta/*
 
 # Turbo
 .turbo
 
 # Vercel
 .vercel
-
 # Build Outputs
 .next/
 out/
 build
 dist
 
+#DB
+pg_data
+.pnpm-store
 
 # Debug
 npm-debug.log*
