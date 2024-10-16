@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const fixelFont = localFont({
   src: "../utils/fonts/FixelVariable.woff2",
@@ -29,12 +36,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-      <body
-        className={`${fixelFont.variable} font-fixel antialiased bg-primary-foreground`}
-      >
-        {children}
-      </body>
-    </html>
+    <ClerkProvider>
+      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+        <body
+          className={`${fixelFont.variable} font-fixel antialiased bg-primary-foreground`}
+        >
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
+    
   );
 }

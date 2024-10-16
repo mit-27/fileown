@@ -21,6 +21,7 @@ import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
 // import { signIn, useSession } from "next-auth/react";
 import { on } from "events";
 import { useRouter } from "next/navigation";
+import { useClerk, useUser } from "@clerk/nextjs";
 
 
 
@@ -44,10 +45,20 @@ const navItemStyles = cva(
 
 const Navbar = () => {
   const pathname = usePathname();
-  // const {data : currentSession} = useSession();
+  const {openSignIn,signOut} = useClerk();
+  const {isLoaded,isSignedIn} = useUser();
   const router = useRouter();
 
-  const onSignIn = () => {
+  const onSignIn = async () => {
+
+    if(isLoaded && !isSignedIn) {
+      openSignIn();
+    }
+
+    if(isLoaded && isSignedIn) {
+      router.push('/dashboard');
+    }
+
     // if(currentSession) {
     //   router.push('/dashboard')
     // }
@@ -140,7 +151,7 @@ const Navbar = () => {
         <div className="block md:hidden">
           <MobileNav />
         </div>
-        <Button onClick={() => onSignIn()} className="h-7 px-5 rounded-sm py-1 text-sm hidden md:block" >Login</Button>
+        <Button onClick={() => onSignIn()} className="h-7 px-5 rounded-sm py-1 text-sm hidden md:block" >{isLoaded && isSignedIn ? 'Dashboard' : 'Login'}</Button>
       </div>
     </header>
   )
