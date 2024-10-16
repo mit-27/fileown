@@ -29,9 +29,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body
-        className={`${fixelFont.variable} font-fixel antialiased`}
+        className={`${fixelFont.variable} font-fixel antialiased bg-primary-foreground`}
       >
         {children}
       </body>
