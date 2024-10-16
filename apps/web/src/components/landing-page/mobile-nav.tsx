@@ -29,11 +29,14 @@ import { SocialIconButton } from "@/components/ui/social-button";
 import { Page } from "@/config/landing-page-nav-items";
 // import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { useClerk, useUser } from "@clerk/nextjs";
+
 
 const MobileNav = () => {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
-  // const {data : currentSession} = useSession();
+  const {openSignIn,signOut} = useClerk();
+  const {isLoaded,isSignedIn} = useUser();
   const router = useRouter();
   const [{ y }] = useWindowScroll();
   const _isScroll = React.useMemo(() => y && y > 0, [y]);
@@ -43,12 +46,13 @@ const MobileNav = () => {
   }, []); // remove searchParams if not needed
 
   const onSignIn = () => {
-    // if(currentSession) {
-    //   router.push('/dashboard')
-    // }
-    // else {
-    //   signIn('google', { callbackUrl: '/dashboard' })
-    // }
+    if(isLoaded && !isSignedIn) {
+      openSignIn();
+    }
+
+    if(isLoaded && isSignedIn) {
+      router.push('/dashboard');
+    }
   }
 
   return (
@@ -127,7 +131,7 @@ const MobileNav = () => {
                 </li>
               ))}
             </ul>
-            <Button onClick={() => onSignIn()} variant={"shine"}>Log in</Button>
+            <Button onClick={() => onSignIn()}>{isLoaded && isSignedIn ? 'Dashboard' : 'Login'}</Button>
           </div>
         </div>
       </SheetContent>
