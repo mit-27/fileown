@@ -17,6 +17,7 @@ export class PostController {
     async postHandler() {
         return tsRestHandler(contract.posts, {
             getPosts: async () => {
+                console.log("getPosts xzx");
                 const posts = await this.postService.getPosts();
                 if (!posts) {
                     return {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Providers } from "@/providers/api-client-provider";
+
 import {
   ClerkProvider,
 } from '@clerk/nextjs'
@@ -22,7 +24,9 @@ export default function RootLayout({
         <body
           className={`antialiased bg-primary-foreground`}
         >
-          {children}
+          <Providers>
+            {children}
+          </Providers>
         </body>
       </html>
     </ClerkProvider>
