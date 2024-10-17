@@ -3,27 +3,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import {
   ClerkProvider,
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton
 } from '@clerk/nextjs'
 
-const fixelFont = localFont({
-  src: "../utils/fonts/FixelVariable.woff2",
-  variable: "--font-fixel",
-  weight: "100 900",
-  style: "normal",
-  display: "swap"
-});
-
-// const fixelItalicFont = localFont({
-//   src: "./fonts/FixelVariableItalic.woff2",
-//   variable: "--font-fixel",
-//   weight: "100 900",
-//   style: "italic",
-//   display: "swap"
-// });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -39,7 +20,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className="scroll-smooth" suppressHydrationWarning>
         <body
-          className={`${fixelFont.variable} font-fixel antialiased bg-primary-foreground`}
+          className={`antialiased bg-primary-foreground`}
         >
           {children}
         </body>
