@@ -1,17 +1,11 @@
 import { initContract } from '@ts-rest/core';
+import { createSelectSchema } from 'drizzle-zod';
 import { z } from 'zod';
+import { user } from '../../db/schema';
 
 const c = initContract();
 
-const UserSchema = z.object({
-    id: z.string().uuid().optional(), // uuid with random default
-    name: z.string().max(255).nullable(), // varchar(255)
-    email: z.string().email(), // unique and not null
-    emailVerified: z.boolean().nullable(), // boolean, can be null
-    image: z.string().nullable(), // text, can be null
-    createdAt: z.string().optional(), // timestamp in string format, defaulting to now
-    updatedAt: z.string().optional()  // timestamp
-});
+const UserSchema = createSelectSchema(user)
 
 const ErrorSchema = z.object({
     message: z.string(),

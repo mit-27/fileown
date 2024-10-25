@@ -15,10 +15,10 @@ export class AuthService {
     async verifyToken(bearToken: string) {
 
         try {
-            const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+            const client = new OAuth2Client(process.env.AUTH_GOOGLE_ID);
             const ticket = await client.verifyIdToken({
                 idToken: bearToken,
-                audience: process.env.GOOGLE_CLIENT_ID,
+                audience: process.env.AUTH_GOOGLE_ID,
             });
             const payload = ticket.getPayload()!;
             const currentTimestamp = Math.floor(new Date().getTime() / 1000);
@@ -26,7 +26,7 @@ export class AuthService {
                 throw new Error();
             }
 
-            if (payload.aud !== process.env.GOOGLE_CLIENT_ID) {
+            if (payload.aud !== process.env.AUTH_GOOGLE_ID) {
                 throw new Error();
             }
 

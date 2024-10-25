@@ -2,6 +2,7 @@
 import { contract } from '@fileown/shared';
 import { initTsrReactQuery } from '@ts-rest/react-query/v5';
 import Cookies from 'js-cookie';
+
 // import { auth } from './auth';
 
 
@@ -9,7 +10,7 @@ import Cookies from 'js-cookie';
 export const api = initTsrReactQuery(contract, {
     baseUrl: process.env.NEXT_PUBLIC_CLIENTSIDE_SERVER_URL!,
     baseHeaders: {
-        'Authorization': () => `Bearer ${Cookies.get("__session")}`,
+        'Authorization': () => `Bearer ${Cookies.get("access_token")}`,
         // 'x-app-source': 'ts-rest',
         // 'x-access-token': () => getAccessToken(),
     },
