@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 // import { User, user } from '@/drizzle/schema'
 import { DRIZZLE } from '@/core/drizzle/drizzle.module';
@@ -27,7 +27,7 @@ export class AuthService {
             }
 
             if (payload.aud !== process.env.AUTH_GOOGLE_ID) {
-                throw new Error();
+                throw new UnauthorizedException('Invalid audience claim in JWT token')
             }
 
             return {
