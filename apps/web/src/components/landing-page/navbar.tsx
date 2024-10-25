@@ -18,10 +18,9 @@ import MobileNav from "./mobile-nav";
 import { Button } from "../ui/button";
 import { cva } from "class-variance-authority";
 import * as NavigationMenuPrimitive from "@radix-ui/react-navigation-menu";
-// import { signIn, useSession } from "next-auth/react";
-import { on } from "events";
 import { useRouter } from "next/navigation";
-import { useClerk, useUser } from "@clerk/nextjs";
+import { signIn, useSession } from "next-auth/react";
+
 
 
 
@@ -45,26 +44,17 @@ const navItemStyles = cva(
 
 const Navbar = () => {
   const pathname = usePathname();
-  const {openSignIn,signOut} = useClerk();
-  const {isLoaded,isSignedIn} = useUser();
+  const {data : currentSession} = useSession();
   const router = useRouter();
 
   const onSignIn = async () => {
 
-    if(isLoaded && !isSignedIn) {
-      openSignIn();
+    if(currentSession) {
+      router.push('/dashboard')
     }
-
-    if(isLoaded && isSignedIn) {
-      router.push('/dashboard');
+    else {
+      signIn('google', { callbackUrl: '/dashboard' })
     }
-
-    // if(currentSession) {
-    //   router.push('/dashboard')
-    // }
-    // else {
-    //   signIn('google', { callbackUrl: '/dashboard' })
-    // }
   }
 
   return (
@@ -151,7 +141,7 @@ const Navbar = () => {
         <div className="block md:hidden">
           <MobileNav />
         </div>
-        <Button onClick={() => onSignIn()} className="h-7 px-5 rounded-sm py-1 text-sm hidden md:block" >{isLoaded && isSignedIn ? 'Dashboard' : 'Login'}</Button>
+        <Button onClick={() => onSignIn()} className="h-7 px-5 rounded-sm py-1 text-sm hidden md:block" >{currentSession ? 'Dashboard' : 'Login'}</Button>
       </div>
     </header>
   )

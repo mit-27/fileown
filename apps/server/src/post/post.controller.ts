@@ -3,7 +3,7 @@ import { PostService } from './post.service';
 // import { CreatePostDto } from './dto/create-post.dto';
 import { contract } from '@fileown/shared';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
-import { JWTAuthGuard } from 'src/core/auth/guards/auth.guard';
+import { AuthGuard } from 'src/core/auth/guards/auth.guard';
 
 
 @Controller()
@@ -12,7 +12,7 @@ export class PostController {
     constructor(private readonly postService: PostService) { }
 
 
-    @UseGuards(JWTAuthGuard)
+    @UseGuards(AuthGuard)
     @TsRestHandler(contract.posts)
     async postHandler() {
         return tsRestHandler(contract.posts, {
@@ -87,22 +87,4 @@ export class PostController {
         })
 
     }
-
-    // @Post()
-    // createPost(@Body() post: CreatePostDto) {
-    //     return this.postService.addPost(post);
-    // }
-
-    // @Get()
-    // getPosts() {
-    //     return this.postService.getPosts();
-    // }
-
-
-
-
-
-
-
-
 } 

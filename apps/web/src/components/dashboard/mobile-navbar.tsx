@@ -3,11 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { dashboardNavitems } from "@/config/dashboard-navitems";
 import { cn } from "@/lib/utils";
-import { LogOut, Menu } from "lucide-react";
-import { SignOutButton, UserButton } from "@clerk/nextjs";
+import { LogOut, Menu, User } from "lucide-react"
+
 // import { signOut } from "next-auth/";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { UserButton } from "./user-button";
 
 
 type Props = {
@@ -23,10 +24,11 @@ export const MobileNavBar = ({ className }: Props) => {
           <SheetTrigger className="p-2 rounded-md hover:bg-muted">
             <Menu className="w-6 h-6" />
           </SheetTrigger>
-          <p className="font-bold mx-2">{'Fileown'}</p>
-          
-          <UserButton />
-          {/* <WorkspaceSwitcher /> */}
+          <p className="font-bold mx-2 flex-grow">{'Fileown'}</p>
+
+          <UserButton navbarMode={true} />
+
+
         </div>
         <SheetHeader>
           <SheetClose />
@@ -45,14 +47,14 @@ export const MobileNavBar = ({ className }: Props) => {
                   </SheetClose>
                 </Link>
               ))}
-              <SignOutButton redirectUrl={"/"}>
+              {/* <SignOutButton redirectUrl={"/"}> */}
                 <SheetClose asChild>
                   <Button variant="ghost" className="justify-start w-full py-2 border-t">
                     <LogOut className="w-4 h-4 mr-2" />
                     Sign Out
                   </Button>
                 </SheetClose>
-              </SignOutButton>
+              {/* </SignOutButton> */}
             </div>
           </div>
         </SheetContent>
