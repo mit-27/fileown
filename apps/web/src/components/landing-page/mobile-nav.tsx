@@ -1,8 +1,12 @@
 "use client";
 
-import { Menu } from "lucide-react";
+import Link, { type LinkProps } from "next/link";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import * as React from "react";
+
+import { Menu } from "lucide-react";
+import { signIn, useSession } from "next-auth/react";
 
 import {
   Accordion,
@@ -11,6 +15,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { Icons, type ValidIcon } from "@/components/ui/icons";
 import {
   Sheet,
   SheetContent,
@@ -18,23 +23,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-
+import { SocialIconButton } from "@/components/ui/social-button";
 import { mainPageConfig } from "@/config/landing-page-nav-items";
+import { Page } from "@/config/landing-page-nav-items";
 import { socialsConfig } from "@/config/social-button-names-config";
 import { useWindowScroll } from "@/hooks/use-window-scroll";
 import { cn } from "@/lib/utils";
-import Link, { type LinkProps } from "next/link";
-import { Icons, type ValidIcon } from "@/components/ui/icons";
-import { SocialIconButton } from "@/components/ui/social-button";
-import { Page } from "@/config/landing-page-nav-items";
-import { signIn, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-
 
 const MobileNav = () => {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
-  const {data : currentSession} = useSession();
+  const { data: currentSession } = useSession();
   const router = useRouter();
   const [{ y }] = useWindowScroll();
   const _isScroll = React.useMemo(() => y && y > 0, [y]);
@@ -44,21 +43,20 @@ const MobileNav = () => {
   }, []); // remove searchParams if not needed
 
   const onSignIn = () => {
-    if(currentSession) {
-      router.push('/dashboard')
+    if (currentSession) {
+      router.push("/dashboard");
+    } else {
+      signIn("google", { callbackUrl: "/dashboard" });
     }
-    else {
-      signIn('google', { callbackUrl: '/dashboard' })
-    }
-  }
+  };
 
   return (
-    <Sheet open={open} onOpenChange={(value : boolean) => setOpen(value)}>
+    <Sheet open={open} onOpenChange={(value: boolean) => setOpen(value)}>
       <SheetTrigger asChild>
         <Button
           // size="icon"
           variant="ghost"
-          className="rounded-full text-sm h-7"
+          className="h-7 rounded-full text-sm"
           aria-label="menu"
         >
           <Menu className="h-6 w-6" />
@@ -70,7 +68,7 @@ const MobileNav = () => {
         </SheetHeader>
         <div className="flex flex-1 flex-col justify-between gap-8">
           <ul className="grid gap-1">
-            {mainPageConfig.map(({ href, title, icon, children } : Page) => {
+            {mainPageConfig.map(({ href, title, icon, children }: Page) => {
               if (!children) {
                 const isExternal = href.startsWith("http");
                 const _externalProps = isExternal ? { target: "_blank" } : {};
@@ -128,13 +126,15 @@ const MobileNav = () => {
                 </li>
               ))}
             </ul>
-            <Button onClick={() => onSignIn()}>{currentSession ? 'Dashboard' : 'Login'}</Button>
+            <Button onClick={() => onSignIn()}>
+              {currentSession ? "Dashboard" : "Login"}
+            </Button>
           </div>
         </div>
       </SheetContent>
     </Sheet>
   );
-}
+};
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -148,12 +148,14 @@ const ListItem = React.forwardRef<
         ref={ref}
         className={cn(
           "flex select-none items-center gap-2 space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
-          className,
+          className
         )}
         {...props}
       >
         <Icon className="h-4 w-4" />
-        <div className="font-medium text-sm text-[13px] leading-none">{title}</div>
+        <div className="text-[13px] text-sm font-medium leading-none">
+          {title}
+        </div>
       </Link>
     </li>
   );
@@ -172,7 +174,7 @@ const ListItemSingle = React.forwardRef<
         ref={ref}
         className={cn(
           "flex flex-1 items-center justify-between border-b py-4 font-medium transition-all hover:underline",
-          className,
+          className
         )}
         {...props}
       >
@@ -183,5 +185,4 @@ const ListItemSingle = React.forwardRef<
 });
 ListItemSingle.displayName = "ListItemSingle";
 
-
-export default MobileNav
+export default MobileNav;

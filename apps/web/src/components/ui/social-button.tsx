@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { Button } from "./button";
-
 import type { Social } from "@/config/social-button-names-config";
+
+import { Button } from "./button";
 import { Icons } from "./icons";
 
 export function SocialIconButton({ href, title, icon }: Social) {
