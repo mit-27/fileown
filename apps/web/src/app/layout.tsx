@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { auth } from "@/lib/auth";
 import SessionProvider from "@/providers/SessionProvider";
 import { Providers } from "@/providers/api-client-provider";
+import { ThemeProvider } from "@/providers/theme-provider";
 
 import "./globals.css";
 
@@ -21,9 +22,11 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`bg-primary-foreground antialiased`}>
-        <SessionProvider session={session}>
-          <Providers>{children}</Providers>
-        </SessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="light">
+          <SessionProvider session={session}>
+            <Providers>{children}</Providers>
+          </SessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

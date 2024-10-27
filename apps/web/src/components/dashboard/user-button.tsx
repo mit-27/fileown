@@ -9,7 +9,6 @@ import { signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -51,7 +50,7 @@ export const UserButton = ({ navbarMode = false }: UserButtonProps) => {
 
           {!navbarMode ? (
             <>
-              <p className="text-md">{currentSession.user?.name}</p>
+              <p className="text-md font-medium">{currentSession.user?.name}</p>
               <ChevronRight className="h-4 w-4" />
             </>
           ) : null}
