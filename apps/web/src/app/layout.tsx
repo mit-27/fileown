@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
-import { Providers } from "@/providers/api-client-provider";
+
+// import localFont from "next/font/local";
 import { auth } from "@/lib/auth";
 import SessionProvider from "@/providers/SessionProvider";
+import { Providers } from "@/providers/api-client-provider";
 
-
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,18 +19,12 @@ export default async function RootLayout({
 }>) {
   const session = await auth();
   return (
-      <html lang="en" className="scroll-smooth" suppressHydrationWarning>
-        <body
-          className={`antialiased bg-primary-foreground`}
-        >
-          <SessionProvider session={session}>
-          <Providers>
-            {children}
-          </Providers>
-          </SessionProvider>
-          
-        </body>
-      </html>
-    
+    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+      <body className={`bg-primary-foreground antialiased`}>
+        <SessionProvider session={session}>
+          <Providers>{children}</Providers>
+        </SessionProvider>
+      </body>
+    </html>
   );
 }

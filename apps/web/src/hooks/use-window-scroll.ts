@@ -1,5 +1,4 @@
 // Props: https://github.com/uidotdev/usehooks/blob/90fbbb4cc085e74e50c36a62a5759a40c62bb98e/index.js#L1310
-
 import * as React from "react";
 
 export function useWindowScroll() {
@@ -19,7 +18,7 @@ export function useWindowScroll() {
       window.scrollTo(args[0], args[1]);
     } else {
       throw new Error(
-        "Invalid arguments passed to scrollTo. See here for more info. https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo",
+        "Invalid arguments passed to scrollTo. See here for more info. https://developer.mozilla.org/en-US/docs/Web/API/Window/scrollTo"
       );
     }
   }, []);

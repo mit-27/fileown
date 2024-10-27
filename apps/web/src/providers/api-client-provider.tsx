@@ -1,13 +1,17 @@
 "use client";
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import {api} from '../lib/api-client'
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
+
 // import posthog from 'posthog-js'
 // import { PostHogProvider, usePostHog } from 'posthog-js/react'
-import { usePathname, useSearchParams } from 'next/navigation';
+import { usePathname, useSearchParams } from "next/navigation";
+
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+
+import { api } from "../lib/api-client";
+
 // import { useEffect } from 'react';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 // if (typeof window !== 'undefined') {
 //   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
@@ -16,7 +20,6 @@ const queryClient = new QueryClient()
 // }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-
   const pathname = usePathname();
   const searchParams = useSearchParams();
   // const posthog = usePostHog();
@@ -36,16 +39,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
   //   }
   // }, [pathname, searchParams, posthog])
 
-
   return (
     // <PostHogProvider client={posthog}>
-      <QueryClientProvider client={queryClient}>
-        <api.ReactQueryProvider>
-          {children}    
-        </api.ReactQueryProvider>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <api.ReactQueryProvider>{children}</api.ReactQueryProvider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
     // {/* </PostHogProvider> */}
-    
   );
 }
