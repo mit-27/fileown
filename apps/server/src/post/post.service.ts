@@ -25,21 +25,21 @@ export class PostService {
         return allPosts[0];
     }
 
-    async getPost(id: string) {
+    async getPost(id: number) {
         this.logger.info('Fetching post');
         this.postHogService.captureEvent(`post-${id}`, 'fetched');
         const fetchedpost = await this.db.select().from(post).where(eq(post.id,id));
         return fetchedpost[0];
     }
 
-    async updatePost(id: string, newPost: NewPost) {
+    async updatePost(id: number, newPost: NewPost) {
         this.logger.info('Updating post');
         this.postHogService.captureEvent(`post-${id}`, 'updated');
         const updatedPost = await this.db.update(post).set(newPost).where(eq(post.id, id)).returning();
         return updatedPost[0];
     }
 
-    async deletePost(id: string) {
+    async deletePost(id: number) {
         this.logger.info('Deleting post');
         this.postHogService.captureEvent(`post-${id}`, 'deleted');
         const deletedPost = await this.db.delete(post).where(eq(post.id, id)).returning();

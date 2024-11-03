@@ -20,7 +20,7 @@ export const postContract = c.router(
                 200: PostSchema,
                 400: ErrorSchema,
             },
-            body: PostSchema.omit({ id: true, createdAt: true }),
+            body: PostSchema.omit({ id: true,createdAt:true,updatedAt:true }),
             summary: 'Create a post',
         },
         getPosts: {
@@ -36,7 +36,7 @@ export const postContract = c.router(
             method: 'GET',
             path: '/posts/:id',
             pathParams: z.object({
-                id: z.string().uuid(),
+                id: z.number(),
             }),
             responses: {
                 200: PostSchema,
@@ -48,7 +48,7 @@ export const postContract = c.router(
             method: 'PUT',
             path: '/posts/:id',
             pathParams: z.object({
-                id: z.string().uuid(),
+                id: z.number(),
             }),
             body: PostSchema.omit({ id: true }),
             responses: {
@@ -61,7 +61,7 @@ export const postContract = c.router(
             method: 'DELETE',
             path: '/posts/:id',
             pathParams: z.object({
-                id: z.string().uuid(),
+                id: z.number(),
             }),
             body: z.any(),
             responses: {

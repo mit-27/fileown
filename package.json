@@ -5,6 +5,7 @@
     "build": "turbo build",
     "dev": "concurrently \"turbo run dev --filter=@fileown/web\" \"turbo run dev --filter=@fileown/server\" \"turbo run dev --filter=@fileown/shared\"",
     "dev:db": "turbo run dev --filter=@fileown/shared",
+    "dev:db:ui": "turbo run db:ui --filter=@fileown/shared",
     "build:shared": "turbo run build --filter=@fileown/shared",
     "dev:docker": "concurrently \"turbo run dev --filter=@fileown/server\" \"turbo run dev --filter=@fileown/shared\"",
     "lint": "turbo lint",
@@ -12,6 +13,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.1",
+    "drizzle-kit": "^0.24.2",
     "prettier": "^3.2.5",
     "turbo": "^2.1.2",
     "typescript": "^5.4.5"
