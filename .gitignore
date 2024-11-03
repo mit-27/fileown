@@ -30,6 +30,8 @@ dist
 
 #DB
 fileown.db
+fileown.db-shm
+fileown.db-wal
 pg_data
 .pnpm-store
 
