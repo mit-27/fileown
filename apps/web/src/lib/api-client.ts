@@ -9,7 +9,7 @@ import Cookies from "js-cookie";
 export const api = initTsrReactQuery(contract, {
   baseUrl: process.env.NEXT_PUBLIC_CLIENTSIDE_SERVER_URL!,
   baseHeaders: {
-    Authorization: () => `Bearer ${Cookies.get("access_token")}`,
+    Authorization: () => `Bearer ${Cookies.get("authjs.session-token")}`,
     // 'x-app-source': 'ts-rest',
     // 'x-access-token': () => getAccessToken(),
   },

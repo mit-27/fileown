@@ -1,10 +1,13 @@
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, Inject, } from '@nestjs/common';
 import { AuthService } from '../auth.service';
+import { DRIZZLE } from '@/core/drizzle/drizzle.module';
+import { DrizzleDB, sessions, user } from '@fileown/shared';
+import { eq } from 'drizzle-orm';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
 
-    constructor(private readonly authService: AuthService) { }
+    constructor(private readonly authService: AuthService,@Inject(DRIZZLE) private readonly db: DrizzleDB) { }
 
 
     async canActivate(
@@ -28,8 +31,27 @@ export class AuthGuard implements CanActivate {
         }
 
         try {
-            const user = await this.authService.verifyToken(token);
-            request.user = user;
+
+            const currentSession = await this.db.select().from(sessions).where(eq(sessions.sessionToken, token)).get();
+            if (!currentSession || (new Date(currentSession.expires).getTime() < Date.now())) {
+                throw new UnauthorizedException();
+            }
+
+            console.log('Current session:', currentSession);
+
+            const currentUser = await this.db.select().from(user).where(eq(user.id, currentSession.userId)).get();
+            if (!currentUser) {
+                throw new UnauthorizedException();
+            }
+            console.log('Current user:', currentUser);
+            request.user = currentUser;
+
+
+
+
+
+            // const user = await this.authService.verifyToken(token);
+            // request.user = user;
             // request.user = {
             //     id: "1",
             //     email: "test@test.com",
