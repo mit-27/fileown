@@ -2,7 +2,7 @@ import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 // import { User, user } from '@/drizzle/schema'
 import { DRIZZLE } from '@/core/drizzle/drizzle.module';
-import { DrizzleDB, user, NewUser } from '@fileown/shared';
+import { DrizzleDB, user,NewUser } from '@fileown/shared';
 import { eq } from 'drizzle-orm';
 
 @Injectable()
@@ -51,7 +51,7 @@ export class AuthService {
 
         // check if user exists
         try {
-            const userExists = await this.db.select().from(user).where(eq(user.id, loggedInUser.id));
+            const userExists = await this.db.select().from(user).where(eq(user.id, loggedInUser.id!));
             if (userExists.length > 0) {
                 console.log('User already exists');
                 return userExists[0];

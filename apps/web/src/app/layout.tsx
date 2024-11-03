@@ -22,7 +22,11 @@ export default async function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <body className={`bg-primary-foreground antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="light"
+          forcedTheme="light"
+        >
           <SessionProvider session={session}>
             <Providers>{children}</Providers>
           </SessionProvider>
