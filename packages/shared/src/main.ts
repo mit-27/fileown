@@ -13,12 +13,13 @@ export const contract = c.router(
         posts: postContract,
         users: userContract,
     },
-    { pathPrefix: '/api', strictStatusCodes: true }
+    { pathPrefix: '/api', strictStatusCodes: true },
+
 );
 
 
 // export * from './db';
 export * from './db/schema';
 export {schema};
-export * from 'drizzle-orm/libsql'
+// export * from 'drizzle-orm/libsql'
 export * from './db/types';

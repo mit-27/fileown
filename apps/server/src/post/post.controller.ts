@@ -4,15 +4,15 @@ import { PostService } from './post.service';
 import { contract } from '@fileown/shared';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { AuthGuard } from 'src/core/auth/guards/auth.guard';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-
+@ApiBearerAuth('bearerAuth') // Use the scheme defined in Swagger config
+@UseGuards(AuthGuard)
 @Controller()
 export class PostController {
 
     constructor(private readonly postService: PostService) { }
 
-
-    @UseGuards(AuthGuard)
     @TsRestHandler(contract.posts)
     async postHandler() {
         return tsRestHandler(contract.posts, {

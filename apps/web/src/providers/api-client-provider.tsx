@@ -20,8 +20,8 @@ const queryClient = new QueryClient();
 // }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
   // const posthog = usePostHog();
   // useEffect(() => {
   //   // Track pageviews
