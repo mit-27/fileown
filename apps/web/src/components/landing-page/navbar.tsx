@@ -150,10 +150,7 @@ const Navbar = () => {
         <div className="block md:hidden">
           <MobileNav />
         </div>
-        <Button
-          onClick={() => onSignIn()}
-          className="hidden h-7 rounded-sm px-5 py-1 text-sm md:block"
-        >
+        <Button onClick={() => onSignIn()} className="hidden text-sm md:block">
           {currentSession ? "Dashboard" : "Login"}
         </Button>
       </div>
