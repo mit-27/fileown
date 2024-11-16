@@ -1,5 +1,7 @@
 "use client";
 
+import { QueryClient } from "@tanstack/react-query";
+
 import { Button } from "@/components/ui/button";
 import { api } from "@/lib/api-client";
 
