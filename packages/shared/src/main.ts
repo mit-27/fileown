@@ -20,6 +20,7 @@ export const contract = c.router(
 
 // export * from './db';
 export * from './db/schema';
+export * from './utils';
 export {schema};
 // export * from 'drizzle-orm/libsql'
 export * from './db/types';

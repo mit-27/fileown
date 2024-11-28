@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 
-import { Home, Inbox } from "lucide-react";
+import { Home, Inbox, Plus } from "lucide-react";
 
 import {
   Sidebar,
@@ -18,6 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
@@ -79,6 +80,15 @@ function AppSidebar({ className }: { className: string }) {
                   ))}
                 </SidebarMenu>
               </SidebarGroupContent>
+            </SidebarGroup>
+
+            <SidebarSeparator />
+
+            <SidebarGroup>
+              <SidebarMenuButton>
+                <Plus />
+                <span>Add Provider</span>
+              </SidebarMenuButton>
             </SidebarGroup>
           </SidebarContent>
           <SidebarFooter>
